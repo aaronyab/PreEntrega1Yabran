@@ -1,12 +1,24 @@
 
+import { useParams } from "react-router-dom"
+import useProductos from "../Practica/useProductos"
+import ItemList from "./ItemList"
 
-export const ItemListContainer = ({greeting}) => {
+export const ItemListContainer = () => {
+
+  const { productos, loading } = useProductos()
+  const { categoryId } = useParams()
+
   return (
-    <div className="container">
-        <h2 className="my-5 mx-5 font-semibold flex justify-left"> Productos Destacados</h2>
-        <hr />
-        <p className="text-black  flex justify-left mx-5 items-center my-3 font-base"> {greeting} </p>
-    </div>
-    
+    <>
+      {
+        loading ? (
+          <h2 className="text-center  text-4xl mt-14"> Cargando... </h2>
+         ) : ( <ItemList productos={productos} />
+    )}
+
+
+
+    </>
+
   )
 }
